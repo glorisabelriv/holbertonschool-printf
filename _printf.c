@@ -1,65 +1,49 @@
-#include <string.h>
 #include "main.h"
 /**
- * _printf - formated output
- * @format: parameter
- * Return: number of chracter printed
+ * _printf - Prints formatted output to the standard output
+ * @format: The format string containing format specifiers.
+ * Return: The number of characters printed or -1 if the format string is NULL
  */
-int _printf(const char *format,...)
+int _printf(const char *format, ...)
 {
-	int i = 0;
-    int count = 0;
-    int spc = 0;
-	va_list a;
+	va_list argumentList;
+	int i = 0, characterCount = 0;
+	int (*formatFunctionPointer)(va_list) = NULL;
 
-	va_start(a, format);
-	if (format != NULL)
+	va_start(argumentList, format);
+	if (format == NULL)
+		return (-1);
+	while (format[i])
 	{
-		while (format[i])
+		if (format[i] != '%')
 		{
+			_putchar(format[i]);
+			i++;
+			characterCount++;
+			continue;
+		}
+		i++;
+		formatFunctionPointer = find_format_function(format[i]);
+		if (formatFunctionPointer != NULL)
+		{
+			characterCount += formatFunctionPointer(argumentList);
+		}
+		else
+		{
+			if (format[i] == '\0')
+				return (-1);
 			if (format[i] == '%')
 			{
-				i++;
-				while (format[i] == ' ')
-				{
-					i++;
-					spc++;
-				}
-				switch (format[i])
-				{
-				case 'c':
-				count += printf_char(va_arg(a, int));
-				break;
-				case 's':
-				count += printf_str(va_arg(a, char *));
-				break;
-				case '%':
-				write(1, &format[i], 1);
-				count++;
-				break;
-				case 'i':
-				count += printf_int(va_arg(a, int));
-				break;
-				case 'd':
-				count += printf_int(va_arg(a, int));
-				break;
-				default:
-				count += printf_default(format[i]);
-				i++;
-				break;
-				}
+				characterCount += _putchar('%');
 			}
 			else
 			{
-				write(1, &format[i], 1);
-				count++;
+				characterCount += _putchar('%');
+				characterCount += _putchar(format[i]);
 			}
-			i++;
 		}
-		va_end(a);
-		return (count);
+		i++;
 	}
-	else
-	va_end(a);
-	return (-1);
+	va_end(argumentList);
+	return (characterCount);
 }
