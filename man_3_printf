@@ -1,0 +1,43 @@
+_printf "Marzo 2024"                                                                  _printf
+
+NAME
+     _printf - A version of the printf function.
+
+SYNOPSIS
+        #include "main.h"
+
+        int _printf(const char *format, ...);
+
+
+DESCRIPTION
+      This C program is a simplified implementation of the standard printf function in C.
+      It provides basic functionality for printing formatted text to the console,
+      allowing the user to specify various data types.
+
+CONVERSION SPECIFERS
+
+      %c:   Prints single char.
+
+      %s:   Prints null-terminated string of char.
+
+      %%:   Prints single porcient.
+
+      %d:   Prints intered number.
+
+      %i:   Prints int number.
+
+
+RETURN VALUE
+      The function returns the number of character printed.
+      If format is NULL or end with %, the function return -1.
+
+AUTOR
+     Written by  Glorisabel Rivera & Julio Perez.
+
+
+
+COPYRIGHT
+         Copyright 2024 Glorisabel Rivera & Julio Perez.
+
+DATE
+      Marzo 21, 2024 SH COPYRIGHT
