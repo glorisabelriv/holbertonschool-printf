@@ -45,7 +45,7 @@ int spec_str(va_list args)
  *
  * Return: length of the arguments list element
  */
-int spec_percent(_attribute_((unused))va_list args)
+int spec_percent(__attribute__((unused))va_list args)
 {
 	int count = 0;
 
