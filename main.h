@@ -13,7 +13,7 @@
  * @spec: Function pointer to corresponding function processing the data.
 **/
 
- typedef struct specifier
+typedef struct specifier
 {
 	char c;
 	int (*spec)(va_list);
